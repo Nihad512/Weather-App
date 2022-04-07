@@ -5,10 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/app.js" async></script>
 </head>
 <body>
-   <input type="text"  id="cityName" placeholder="Enter your city's name">
-   <button id="button" >Click me!</button>
+  <div id="center" class="center">
+      <img id="weather" src="assets/images/Clear.png" alt="">
+   <div class="MainItems" id="Main">
+      <span>  <input id="cityName" type="text" placeholder="Search"> <button id="button"></button> </span>
+      <span class="flex direction_column">
+          <p id="Country" >Baku, Azerbaijan</p>
+          <p id="degree">13°C</p>
+          <p id="WT">Sunny</p>
+      </span>
+      <span class="flex direction_column">
+        <p  id="humid">Humidity:40%</p>
+        <p id="wind">Wind Speed:13km/h </p>
+    </span>
+   </div>
+  </div>
 </body>
 </html>
