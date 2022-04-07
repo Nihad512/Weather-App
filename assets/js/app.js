@@ -11,18 +11,46 @@ const Main=document.getElementById('Main').style;
 const colors={
     Clear: '#42C2FF',
     Clouds:'#A8AAC4',
+    Rain:'#A8AAC4',
     Snow:'#6BA7CC'
 }
-let Country='';
+let Country='your current Location';
 let lon;
 let lat;
+if (navigator.geolocation) {        
+    navigator.geolocation.getCurrentPosition((position)=>{
+        const xhttp=new XMLHttpRequest();
+        lat=position.coords.latitude;
+        lon=position.coords.longitude
+        console.log(lat,lon);
+        xhttp.onload= function Name(){
+        let data=JSON.parse(this.response);
+        area.innerText=Country;
+        degree.innerText=data.main.temp +'°C'
+        Wt.innerText=data.weather[0].main
+        humid.innerText='Humidity:'+ data.main.humidity+'%'
+    wind.innerText="Wind Speed:"+data.wind.speed +'km/h'
+    let test=`colors.${data.weather[0].main}`
+    
+    weather.src='assets/images/'+ data.weather[0].main +'.png'
+    center.style.backgroundColor=eval(test)
+    Main.setProperty('--background',` url(../Icons/${data.weather[0].main}.svg)`)
+    }
+    xhttp.open("Get",`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`,true)
+    xhttp.send()
+    });
+   
+    } else {
+       alert("Geolocation is not supported by this browser or you didn't gave the permission") 
+    }
 function getWeather(lat,lon){
     const xhttp=new XMLHttpRequest();
     xhttp.onload= function Name(){
+      
     let data=JSON.parse(this.response);
     Country= Country+', ' + data.sys.country 
     area.innerText=Country;
-    Country= ''
+    
     degree.innerText=data.main.temp +'°C'
     Wt.innerText=data.weather[0].main
     humid.innerText='Humidity:'+ data.main.humidity+'%'
@@ -38,7 +66,7 @@ function getWeather(lat,lon){
 }
 function getCoords() {
     const xhttp=new XMLHttpRequest();
-    
+    Country= ''
     const input=document.getElementById('cityName').value;
     Country=Country+input;
     xhttp.open("Get", `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=5&appid=${apiKey}`, true);
