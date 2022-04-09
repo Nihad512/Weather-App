@@ -1,4 +1,3 @@
-const apiKey="42e1ddedf9d266f82ec9787d8ebd12f4";
 const button=document.getElementById('button');
 const degree=document.getElementById('degree');
 const area=document.getElementById('Country');
